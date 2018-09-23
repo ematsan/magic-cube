@@ -72,12 +72,8 @@ MyCube.mOwer = function () {
   let work = document.querySelector(".work");
   let x = event.pageX==undefined?event.pageX:event.clientX;
   let y = event.pageY==undefined?event.pageX:event.clientY;
-  let str = work.style.left;
-  str = str.substring(0, str.length - 2);
-  x = x - Number(str) - this.cube;
-  str = work.style.top;
-  str = str.substring(0, str.length - 2);
-  y = y - Number(str) - this.cube;
+  x = x - this.cube - work.getBoundingClientRect().left;  
+  y = y - this.cube - work.getBoundingClientRect().top;
   if ((top.style.visibility == "hidden") && (y < 0))
     return;
   if ((left.style.visibility == "hidden") && (x < 0))
