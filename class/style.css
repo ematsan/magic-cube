@@ -1,0 +1,50 @@
+.work {  position : fixed;}
+.main {
+  border: 1px solid #22abe6;
+  position : absolute;
+}
+.bt{
+  border: 1px solid white;
+  background-color: #22abe6;
+  font-size: 26;
+  color: #ffffff;
+  text-align: center;
+  position : absolute;
+}
+
+.right {
+  left: 100%;
+  top : 0px;
+  margin-left: 1px;
+}
+.bottom{
+  top : 100%;
+  left : 0px;
+  margin-top: 1px;
+}
+.bottom, .right{
+  background-color: #ddac01;
+  position : absolute;
+}
+.bottom:hover, .right:hover {
+  cursor: pointer;
+  background-color: #f2d760;
+}
+
+.left{
+  right: 100%;
+  top: 0px;
+  margin-right: 1px;
+}
+.top{
+  bottom: 100%;
+  margin-bottom: 1px;
+}
+.top, .left {
+  visibility: hidden;
+  background-color: #f50b0b;
+}
+.top:hover, .left:hover {
+  cursor: pointer;
+  background-color: #f5a389;
+}
