@@ -193,7 +193,7 @@ MyCube.mClickT = function() {
   left.style.visibility = "hidden";
   top.style.visibility = "hidden";
   for (let i = this.rows - 1; i >=  0; i--){
-     str = ".b" + i + this.cols;
+     let str = ".b" + i + this.cols;
      let btn = main.querySelector(str);
      btn.remove();
    }
