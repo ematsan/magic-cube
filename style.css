@@ -1,15 +1,15 @@
-.work {  position : fixed; }
+.work {  position : fixed;}
 .main {
   border: 1px solid #22abe6;
   position : absolute;
 }
-
 .bt{
   border: 1px solid white;
   background-color: #22abe6;
   font-size: 26;
   color: #ffffff;
   text-align: center;
+  position : absolute;
 }
 
 .right {
@@ -42,7 +42,6 @@
 }
 .top, .left {
   visibility: hidden;
-  position : absolute;
   background-color: #f50b0b;
 }
 .top:hover, .left:hover {
