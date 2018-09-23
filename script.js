@@ -64,7 +64,6 @@ var MyCube = Object.create(HTMLElement.prototype);
    }
 
 MyCube.mOwer = function () {
-  var move = document.querySelector(".block");
   var left = document.querySelector(".left");
   var top = document.querySelector(".top");
   var work = document.querySelector(".work");
@@ -81,9 +80,9 @@ MyCube.mOwer = function () {
   str = str.substring(0, str.length - 2);
   y = y - Number(str) - this.cube;
   if (y > 2)
-    left.style.top = Math.floor(y / this.cube) * (this.cube);
+    left.style.top = Math.floor(y / this.cube) * (this.cube)+ "px";
   if (x > 2)
-    top.style.left = Math.floor(x / this.cube) * this.cube;
+    top.style.left = Math.floor(x / this.cube) * this.cube+ "px";
   if (x > (this.cols * this.cube) || y > (this.rows * this.cube) || ((x < 0) && (y < 0)))
   {
     left.style.visibility = "hidden";
@@ -95,8 +94,8 @@ MyCube.mClickR = function () {
   this.cols++;
   var work = document.querySelector(".work");
   var main = document.querySelector(".main");
-  work.style.width = (this.cols + 2) * this.cube;
-  main.style.width = this.cols * this.cube;
+  work.style.width = (this.cols + 2) * this.cube + "px";
+  main.style.width = this.cols * this.cube+ "px";
   for (let i = 0; i<this.rows; i++){
      var newButton = document.createElement('button');
      newButton.className = "bt";
@@ -114,8 +113,8 @@ MyCube.mClickT = function() {
   top.style.visibility = "hidden";
   var work = document.querySelector(".work");
   var main = document.querySelector(".main");
-  work.style.width = (this.cols + 2)* this.cube;
-  main.style.width = this.cols * this.cube;
+  work.style.width = (this.cols + 2)* this.cube+ "px";
+  main.style.width = this.cols * this.cube+ "px";
   for (let i = 0; i < this.rows; i++)
      main.removeChild(main.children[i]);
 }
@@ -124,8 +123,8 @@ MyCube.mClickB = function () {
   this.rows++;
   var work = document.querySelector(".work");
   var main = document.querySelector(".main");
-  work.style.height = (this.rows + 2) * this.cube;
-  main.style.height = this.rows * this.cube;
+  work.style.height = (this.rows + 2) * this.cube+ "px";
+  main.style.height = this.rows * this.cube+ "px";
   for (let i = 0; i < this.cols; i++){
      var newButton = document.createElement('button');
      newButton.className = "bt";
@@ -143,8 +142,8 @@ MyCube.mClickL = function (){
   top.style.visibility = "hidden";
   var work = document.querySelector(".work");
   var main = document.querySelector(".main");
-  work.style.height = (this.rows + 2)* this.cube;
-  main.style.height = this.rows * this.cube;
+  work.style.height = (this.rows + 2)* this.cube+ "px";
+  main.style.height = this.rows * this.cube+ "px";
   for (let i = 0; i < this.cols; i++){
      main.removeChild(main.children[i]);
    }
