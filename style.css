@@ -25,6 +25,8 @@
 .bottom, .right{
   background-color: #ddac01;
   position : absolute;
+  transition: 1s;
+  transition-property: background-color;
 }
 .bottom:hover, .right:hover {
   cursor: pointer;
@@ -43,6 +45,8 @@
 .top, .left {
   visibility: hidden;
   background-color: #f50b0b;
+  transition: 1s;
+  transition-property: background-color, left, top;
 }
 .top:hover, .left:hover {
   cursor: pointer;
