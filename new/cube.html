@@ -1,0 +1,246 @@
+<html>
+<body>
+
+<template id="tmpl">
+<style>
+    .work {  position : fixed;}
+    .main {
+      border: 1px solid #22abe6;
+      position : absolute;
+    }
+    .bt{
+      border: 1px solid white;
+      background-color: #22abe6;
+      font-size: 26;
+      color: #ffffff;
+      text-align: center;
+      position : absolute;
+    }
+
+    .right {
+      left: 100%;
+      top : 0px;
+      margin-left: 1px;
+    }
+    .bottom{
+      top : 100%;
+      left : 0px;
+      margin-top: 1px;
+    }
+    .bottom, .right{
+      background-color: #ddac01;
+      position : absolute;
+    }
+    .bottom:hover, .right:hover {
+      cursor: pointer;
+      background-color: #f2d760;
+    }
+
+    .left{
+      right: 100%;
+      top: 0px;
+      margin-right: 1px;
+    }
+    .top{
+      bottom: 100%;
+      margin-bottom: 1px;
+    }
+    .top, .left {
+      visibility: hidden;
+      background-color: #f50b0b;
+    }
+    .top:hover, .left:hover {
+      cursor: pointer;
+      background-color: #f5a389;
+    }
+</style>
+
+
+<div class = "content">
+  <content></content>
+</div>
+
+</template>
+
+<script>
+    ! function() {
+
+var localDocument = document.currentScript.ownerDocument;
+var tmpl = localDocument.getElementById('tmpl');
+
+var MyCube = Object.create(HTMLElement.prototype);
+
+ MyCube.createdCallback = function() {
+    this.rows = 4;
+    this.cols = 4;
+    this.cube = 50;
+    let workdiv = document.createElement('div');
+    workdiv.className = "work";
+    workdiv.style.width = this.cube * (this.cols + 2) + "px";
+    workdiv.style.height = this.cube * (this.rows + 2) + "px";
+    workdiv.style.left = this.cube + "px"
+    workdiv.style.top = this.cube + "px"
+    workdiv.onmousemove = this.mOwer.bind(this);
+    let maindiv = document.createElement('div');
+    maindiv.className = "main";
+    maindiv.style.width = this.cube * this.cols + "px";
+    maindiv.style.height = this.cube * this.rows + "px";
+    maindiv.style.left = this.cube + "px"
+    maindiv.style.top = this.cube + "px"
+    workdiv.appendChild(maindiv);
+    for (let i = 0; i < this.rows; i++)
+      for (let j = 0; j < this.cols; j++)
+      {
+        let newButton = document.createElement('button');
+        newButton.className = "bt b" + i + j;
+        newButton.style.width = this.cube + "px";
+        newButton.style.height = this.cube + "px";
+        newButton.style.top = this.cube * i + "px";
+        newButton.style.left = this.cube * j + "px";
+        maindiv.appendChild(newButton);
+      }
+      let newButton = document.createElement('button');
+      newButton.className = "bt right";
+      newButton.innerHTML = '+';
+      newButton.onclick = this.mClickR.bind(this);
+      newButton.style.width = this.cube + "px";
+      newButton.style.height = this.cube + "px";
+      maindiv.appendChild(newButton);
+      newButton = document.createElement('button');
+      newButton.className = "bt bottom";
+      newButton.innerHTML = '+';
+      newButton.onclick = this.mClickB.bind(this);
+      newButton.style.width = this.cube + "px";
+      newButton.style.height = this.cube + "px";
+      maindiv.appendChild(newButton);
+      newButton = document.createElement('button');
+      newButton.className = "bt top";
+      newButton.innerHTML = '-';
+      newButton.onclick = this.mClickT.bind(this);
+      newButton.style.width = this.cube + "px";
+      newButton.style.height = this.cube + "px";
+      maindiv.appendChild(newButton);
+      newButton = document.createElement('button');
+      newButton.className = "bt left";
+      newButton.innerHTML = '-';
+      newButton.onclick = this.mClickL.bind(this);
+      newButton.style.width = this.cube + "px";
+      newButton.style.height = this.cube + "px";
+      maindiv.appendChild(newButton);
+
+      let root = this.createShadowRoot();
+      root.appendChild(tmpl.content.cloneNode(true));
+      root.appendChild(workdiv);
+    }
+
+  MyCube.attachedCallback = function (){
+     }
+
+MyCube.mOwer = function () {
+  let left = this.shadowRoot.querySelector(".left");
+  let top = this.shadowRoot.querySelector(".top");
+  let work = this.shadowRoot.querySelector(".work");
+  let x = event.pageX==undefined?event.pageX:event.clientX;
+  let y = event.pageY==undefined?event.pageX:event.clientY;
+  let str = work.style.left;
+  str = str.substring(0, str.length - 2);
+  x = x - Number(str) - this.cube;
+  str = work.style.top;
+  str = str.substring(0, str.length - 2);
+  y = y - Number(str) - this.cube;
+  if ((top.style.visibility == "hidden") && (y < 0))
+    return;
+  if ((left.style.visibility == "hidden") && (x < 0))
+      return;
+  if (this.cols > 1)
+    top.style.visibility = "visible";
+  if (this.rows > 1)
+    left.style.visibility = "visible";
+  if (y > 2)
+    left.style.top = Math.floor(y / this.cube) * this.cube + "px";
+  if (x > 2)
+    top.style.left = Math.floor(x / this.cube) * this.cube + "px";
+  if (x > (this.cols * this.cube - 2) || y > (this.rows * this.cube - 2) || ((x < 0) && (y < 0)))
+  {
+    left.style.visibility = "hidden";
+    top.style.visibility = "hidden";
+  }
+}
+
+MyCube.mClickR = function () {
+  let work = this.shadowRoot.querySelector(".work");
+  let main = this.shadowRoot.querySelector(".main");
+  for (let i = this.rows - 1; i >= 0; i--){
+     let newButton = document.createElement('button');
+     newButton.className = "bt b" + i + this.cols;
+     newButton.style.width = this.cube + "px";
+     newButton.style.height = this.cube + "px";
+     newButton.style.top = this.cube * i + "px";
+     newButton.style.left = this.cube * this.cols+ "px";
+     main.insertBefore(newButton,main.children[0]);
+   }
+     this.cols++;
+     work.style.width = (this.cols + 2) * this.cube+ "px";
+     main.style.width = this.cols * this.cube+ "px";
+}
+
+MyCube.mClickT = function() {
+  let left = this.shadowRoot.querySelector(".left");
+  let top = this.shadowRoot.querySelector(".top");
+  let work = this.shadowRoot.querySelector(".work");
+  let main = this.shadowRoot.querySelector(".main");
+  this.cols--;
+  left.style.visibility = "hidden";
+  top.style.visibility = "hidden";
+  for (let i = this.rows - 1; i >=  0; i--){
+     str = ".b" + i + this.cols;
+     let btn = main.querySelector(str);
+     btn.remove();
+   }
+  work.style.width = (this.cols + 2)* this.cube+ "px";
+  main.style.width = this.cols * this.cube+ "px";
+}
+
+MyCube.mClickB = function () {
+  let work = this.shadowRoot.querySelector(".work");
+  let main = this.shadowRoot.querySelector(".main");
+  for (let i = 0; i < this.cols; i++){
+     let newButton = document.createElement('button');
+     newButton.className = "bt b" + this.rows + i;
+     newButton.style.width = this.cube + "px";
+     newButton.style.height = this.cube + "px";
+     newButton.style.top = this.cube * this.rows + "px";
+     newButton.style.left = this.cube * i + "px";
+     main.appendChild(newButton);
+   }
+   this.rows++;
+   work.style.height = (this.rows + 2) * this.cube+ "px";
+   main.style.height = this.rows * this.cube+ "px";
+}
+
+MyCube.mClickL = function (){
+  let left = this.shadowRoot.querySelector(".left");
+  let top = this.shadowRoot.querySelector(".top");
+  let work = this.shadowRoot.querySelector(".work");
+  let main = this.shadowRoot.querySelector(".main");
+  this.rows--;
+  left.style.visibility = "hidden";
+  top.style.visibility = "hidden";
+  for (let i = 0; i < this.cols; i++){
+     let str = ".b" + this.rows + i;
+     let btn = main.querySelector(str);
+     btn.remove();
+   }
+  work.style.height = (this.rows + 2)* this.cube+ "px";
+  main.style.height = this.rows * this.cube+ "px";
+}
+
+// регистрируем новый элемент в браузере
+  document.registerElement("mygic-cube", {
+    prototype: MyCube
+  });
+ }();
+</script>
+
+</body>
+</html>
