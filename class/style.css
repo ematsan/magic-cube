@@ -1,9 +1,9 @@
-.work {  position : relative;}
+.wraper {  position : relative;}
 .main {
   border: 1px solid #22abe6;
   position : absolute;
 }
-.bt{
+.btn{
   border: 1px solid white;
   background-color: #22abe6;
   font-size: 26;
